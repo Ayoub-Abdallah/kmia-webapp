@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KMA | Admin</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/c352df61bb.js" crossorigin="anonymous"></script>
+  <link href="assets/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <nav>
+    <div class="container">
+      <img src="assets/images/Massinissa.png" class="logo" />
+      <div class="search-bar">
+        <span class="material-icons">search</span>
+        <input type="search" placeholder="Search" />
+      </div>
+
+      <div class="profile-area">
+        <div class="theme-btn">
+          <span class="material-icons active">light_mode</span>
+          <span class="material-icons">dark_mode</span>
+        </div>
+        <div class="profile">
+          <div class="profile-photo">
+            <img src="assets/images/profile pic.jpg" />
+          </div>
+          <h5>Ayoub</h5>
+          <span class="material-icons">expand_more</span>
+        </div>
+        <button id="menu-btn">
+          <span class="material-icons">menu</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <!-- End of Navbar -->
+  <main>
+    <aside>
+      <button id="close-btn">
+        <span class="material-icons">close</span>
+      </button>
+      <div class="sidebar">
+        <a href="admin" class="active">
+          <span class="material-icons">dashboard</span>
+          <h4>Dashboard</h4>
+        </a>
+        <a href="students">
+          <span class="material-icons">school</span>
+          <h4>Étudiants</h4>
+        </a>
+        <a href="teachers">
+          <span class="material-icons">person</span>
+          <h4>Enseignants</h4>
+        </a>
+        <a href="groups">
+          <span class="material-icons">group</span>
+          <h4>Groupes</h4>
+        </a>
+        <a href="classrooms">
+          <span class="material-icons">class</span>
+          <h4>Salles de classe</h4>
+        </a>
+        <a href="finance">
+          <span class="material-icons">attach_money</span>
+          <h4>Finance</h4>
+        </a>
+
+        <!-- <a href="attendance">
+          <span class="material-icons">check_circle</span>
+          <h4>Présence</h4>
+        </a> -->
+        <a href="settings">
+          <span class="material-icons">settings</span>
+          <h4>Paramètres</h4>
+        </a>
+      </div>
+      <!-- End of sidebar -->
+
+
+    </aside>
+    <!-- End of aside -->
+
+    <section class="middle">
+      <div class="header">
+        <h1>Fast Actions</h1>
+      </div>
+      <div class="fast-access">
+        <button onclick="activateTab(0)">
+          <span class="material-icons">person_add</span>
+          <h1>Nouvel étudiant</h1>
+        </button>
+        <!-- <button onclick="activateTab(1)">
+          <span class="material-icons">groups</span>
+          <h1>Promotion d'étudiants</h1>
+        </button> -->
+        <!-- <button onclick="activateTab(2)">
+          <span class="material-icons">group</span>
+          <h1>Promotion d'enseignants</h1>
+        </button> -->
+        <button onclick="activateTab(4)">
+          <span class="material-icons">money_off</span>
+          <h1>Nouvelle dépense</h1>
+        </button>
+        <button onclick="activateTab(3)">
+          <span class="material-icons">attach_money</span>
+          <h1>Nouveau revenu</h1>
+        </button>
+        <!-- <button>
+          <span class="material-icons">add</span>
+          <h1>New Student</h1>
+        </button> -->
+
+      </div>
+      <div class="header">
+        <h1>Overview</h1>
+        Soon...
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="top">
+            <div class="left">
+              <img src="assets/images/arduino course.png" />
+              <h2>Arduino Course </h2>
+            </div>
+          </div>
+          <div>
+            <h3>
+              <i class="fa-solid fa-bell"></i> There is a session today!
+            </h3>
+            <br>
+            <h4>Registrants: 38</h4>
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <small>Prepared by</small>
+              <h5>Ben Chahla Ayoub</h5>
+            </div>
+            <div class="right">
+              <div class="expiry">
+                <small>Next</small>
+                <h5>29/06</h5>
+              </div>
+              <div class="cvv">
+                <small>Session</small>
+                <h5>13</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="top">
+            <div class="left">
+              <img src="assets/images/lang course.png" />
+              <h2>Spanish Course </h2>
+            </div>
+          </div>
+          <div>
+            <h3>
+              <i class="fa-solid fa-moon"></i> There is no session today
+            </h3>
+            <br>
+            <h4>Registrants:31</h4>
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <small>Prepared by</small>
+              <h5>Bouabdallah Sami</h5>
+            </div>
+            <div class="right">
+              <div class="expiry">
+                <small>Next</small>
+                <h5>28/06</h5>
+              </div>
+              <div class="cvv">
+                <small>Session</small>
+                <h5>8</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="top">
+            <div class="left">
+              <img src="assets/images/web course.png" />
+              <h2>Web-Dev Course </h2>
+            </div>
+          </div>
+          <div>
+            <h3>
+              <i class="fa-solid fa-bell"></i> There is a session today!
+            </h3>
+            <br>
+            <h4>Registrants: 41</h4>
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <small>Prepared by</small>
+              <h5>Lekhel Karim</h5>
+            </div>
+            <div class="right">
+              <div class="expiry">
+                <small>Next</small>
+                <h5>30/06</h5>
+              </div>
+              <div class="cvv">
+                <small>Session</small>
+                <h5>21</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="top">
+            <div class="left">
+              <img src="assets/images/lang course.png" />
+              <h2>French Course </h2>
+            </div>
+          </div>
+          <div>
+            <h3>
+              <i class="fa-solid fa-moon"></i> There is no session today
+            </h3>
+            <br>
+            <h4>Registrants:42</h4>
+          </div>
+          <div class="bottom">
+            <div class="left">
+              <small>Prepared by</small>
+              <h5>Benmhidi Ikhlas</h5>
+            </div>
+            <div class="right">
+              <div class="expiry">
+                <small>Next</small>
+                <h5>27/06</h5>
+              </div>
+              <div class="cvv">
+                <small>Session</small>
+                <h5>32</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- end of Cards-->
+
+    </section>
+    <!-- End of Middle -->
+
+    <!-- Start of windows -->
+
+    <!-- Add Student start -->
+    <form class="back-cover add_student-cover">
+      <div class=" form-container add_student ">
+          <h1>Ajouter Etudiant</h1>
+          <div>
+              <label for="">
+                  Nom
+                  <input type=" text" name="lastname" id="">
+              </label>
+              <label for="">
+                  Prénom
+                  <input type="text" name="firstname" id="">
+              </label>
+          </div>
+          <div>
+              <label for="">
+                  Date de naissance
+                  <input type="date" name="birthdate" id="">
+              </label>
+              <label for="">
+                  Lieu de naissance
+                  <input type="text" name="birthplace" id="">
+              </label>
+          </div>
+          <div>
+              <label for="">
+                  Les parents
+                  <input type="text" name="parents" id="">
+              </label>
+              <label for="">
+                  sexe
+                  <select name="sex" id="">
+                      <option value="male">Mâle</option>
+                      <option value="female">Femelle</option>
+                  </select>
+              </label>
+          </div>
+          <h2>Contact</h2>
+          <div>
+              <label for="">
+                  Téléphone
+                  <input type="number" name="phone" id="">
+              </label>
+              <label for="">
+                  Email
+                  <input type="email" name="email" id="">
+              </label>
+          </div>
+          <div>
+              <label for="">
+                  Mobile 01
+                  <input type="number" name="mobile1" id="">
+              </label>
+              <label for="">
+                  Mobile 02
+                  <input type="number" name="mobile2" id="">
+              </label>
+          </div>
+          <h2>Info Academique</h2>
+          <div>
+              <label for="">
+                  Le groupe
+                  <select name="group" class="add-student-group-select" id="">
+                      <option value="">Selectionner un groupe</option>
+
+                  </select>
+              </label>
+              <label for="">
+                  Année scolaire
+                  <input type="text" name="schoolyear" id="">
+              </label>
+          </div>
+          <h2>Info Additionelle</h2>
+          <label for="">
+              Date d'inscription
+              <input type="date" name="inscriptiondate">
+          </label>
+          <div>
+              <label for="">
+                  problèmes de santé physique
+                  <input type="text" name="physicalproblem" id="">
+              </label>
+              <label for="">
+                  problèmes de santé mentale
+                  <input type="text" name="mentalproblems" id="">
+              </label>
+          </div>
+          <label for="">
+              Notes
+              <textarea type="text" name="notes"></textarea>
+          </label>
+          <div class="btncont">
+              <button onclick="deactivateTabs(0)" type="button">Annuler</button>
+              <button type="submit" onclick="handleAddStudent()">Enregistrer</button>
+          </div>
+      </div>
+  </form>
+    <!-- Add Student end -->
+
+    <!-- Add promo student start -->
+    <section class="back-cover add-promo-student-cover">
+      <div class="form-container add-promo-student">
+        <h1>Ajouter promo Etudiant</h1>
+        <label for="">Valeur</label>
+        <input type="text" name="" id="">
+        <div>
+          <label for="">
+            Groupe
+            <select name="" id="">
+              <option value="">Slectionner Groupe</option>
+              <option value="">Robotique</option>
+            </select>
+          </label>
+          <label for="">
+            Etudiant
+            <select name="" id="">
+              <option value="">Slectionner etudiant</option>
+              <option value="">Ayoub</option>
+            </select>
+          </label>
+        </div>
+        <label for="">Promo</label>
+        <input type="text">
+        <label for="">Notes</label>
+        <textarea type="text" rows="3"></textarea>
+        <div class="btncont">
+          <button onclick="deactivateTabs(1)">Annuler</button>
+          <!-- <button>Enregistrer et imprimer</button> -->
+          <button>Enregistrer</button>
+        </div>
+
+      </div>
+    </section>
+    <!-- Add promo student end -->
+
+    <!-- Add promo teacher start -->
+    <section class="back-cover add-promo-teacher-cover">
+      <div class="form-container add-promo-teacher">
+        <h1>Ajouter promo Teacher</h1>
+        <label for="">Valeur</label>
+        <input type="text" name="" id="">
+        <div>
+          <label for="">
+            Groupe
+            <select name="" id="">
+              <option value="">Slectionner Groupe</option>
+              <option value="">Robotique</option>
+            </select>
+          </label>
+          <label for="">
+            Etudiant
+            <select name="" id="">
+              <option value="">Slectionner Enseignant</option>
+              <option value="">Ayoub</option>
+            </select>
+          </label>
+        </div>
+        <label for="">Promo</label>
+        <input type="text">
+        <label for="">Notes</label>
+        <textarea type="text" rows="3"></textarea>
+        <div class="btncont">
+          <button onclick="deactivateTabs(2)" type="button">Annuler</button>
+          <!-- <button type="button">Enregistrer et imprimer</button> -->
+          <button>Enregistrer</button>
+        </div>
+
+      </div>
+    </section>
+    <!-- Add promo teacher end -->
+
+    <!-- Add income start -->
+    <form class="back-cover add-income-cover">
+      <div class="form-container add-income">
+        <h1>Ajouter Revenu</h1>
+        <label for="">libellé de revenu</label>
+        <input type="text" name="name">
+        <!-- <label for="">La date</label>
+        <input type="date" name="date"> -->
+        <label for="">Montant (DZD)</label>
+        <input type="number" name="value">
+        <label for="">Notes</label>
+        <textarea type="text" rows="3" name="notes"></textarea>
+        <div class="btncont">
+          <button onclick="deactivateTabs(4)" type="button">Annuler</button>
+          <!-- <button type="button">Enregistrer et imprimer</button> -->
+          <button>Enregistrer</button>
+        </div>
+      </div>
+    </form>
+    <!-- Add income end -->
+
+    <!-- Add expense start -->
+    <form class="back-cover add-expenses-cover">
+      <div class="form-container add-expenses">
+        <h1>Ajouter Dépense</h1>
+        <label for="">libellé de dépenses</label>
+        <input type="text" name="name">
+        <!-- <label for="">La date</label>
+        <input type="date" name="date"> -->
+        <label for="">Montant (DZD)</label>
+        <input type="number" name="value">
+        <label for="">Notes</label>
+        <textarea type="text" rows="3" name="notes"></textarea>
+        <div class="btncont">
+          <button onclick="deactivateTabs(3)" type="button">Annuler</button>
+          <!-- <button>Enregistrer et imprimer</button> -->
+          <button>Enregistrer</button>
+        </div>
+      </div>
+    </form>
+    <!-- Add expenses end -->
+    <div class="back-cover success-message-cover">
+      <div class="form-container success-message">
+          <svg xmlns="http://www.w3.org/2000/svg" height="100px" viewBox="0 -960 960 960" width="24px"
+              fill="#e8eaed">
+              <path
+                  d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+          </svg>
+          <h2>Student created successfully!</h2>
+          <div>
+              <button onclick="refresh()">Ok</button>
+          </div>
+      </div>
+  </div>
+
+    <!-- End of windows -->
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+    integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="assets/main.js"></script>
+  <script src="assets/fastAccessController.js"></script>
+  <script src="assets/fetchController.js"></script>
+  <!-- End of Main -->
+</body>
+
+</html>
+<!--<div class="monthly-report">
+  <div class="report">
+    <h3>Income</h3>
+    <div>
+      <details>
+        <h1>$29,023</h1>
+        <h6 class="success">+3.5%</h6>
+      </details>
+      <p>Compared to $26,937 last month</p>
+    </div>
+  </div>
+
+  <div class="report">
+    <h3>Expenses</h3>
+    <div>
+      <details>
+        <h1>$9,003</h1>
+        <h6 class="danger">-6.5%</h6>
+      </details>
+      <p>Compared to $11,992 last month</p>
+    </div>
+  </div>
+
+  <div class="report">
+    <h3>Cashback</h3>
+    <div>
+      <details>
+        <h1>$9.045</h1>
+        <h6 class="success">+7.1%</h6>
+      </details>
+      <p>Compared to $3,053 last month</p>
+    </div>
+  </div>
+
+  <div class="report">
+    <h3>Turnover</h3>
+    <div>
+      <details>
+        <h1>$118,224</h1>
+        <h6 class="danger">-17.8%</h6>
+      </details>
+      <p>Compared to $114,234 last month</p>
+    </div>
+  </div>
+  </div>--> <!-- 
+<div class="fast-payment">
+  <h2>Fast Payment</h2>
+  <div class="badges">
+    <div class="badge">
+      <span class="material-icons">add</span>
+    </div>
+    <div class="badge">
+      <span class="bg-primary"></span>
+      <div>
+        <h5>Trainig</h5>
+        <h4>$50</h4>
+      </div>
+    </div>
+
+    <div class="badge">
+      <span class="bg-success"></span>
+      <div>
+        <h5>Internet</h5>
+        <h4>$40</h4>
+      </div>
+    </div>
+
+    <div class="badge">
+      <span class="bg-primary"></span>
+      <div>
+        <h5>Gas</h5>
+        <h4>$190</h4>
+      </div>
+    </div>
+
+    <div class="badge">
+      <span class="bg-danger"></span>
+      <div>
+        <h5>Movies</h5>
+        <h4>$35</h4>
+      </div>
+    </div>
+
+    <div class="badge">
+      <span class="bg-success"></span>
+      <div>
+        <h5>Sport</h5>
+        <h4>$130</h4>
+      </div>
+    </div>
+
+    <div class="badge">
+      <span class="bg-primary"></span>
+      <div>
+        <h5>Education</h5>
+        <h4>$999</h4>
+      </div>
+    </div>
+
+    <div class="badge">
+      <span class="bg-danger"></span>
+      <div>
+        <h5>Electricity</h5>
+        <h4>$109</h4>
+      </div>
+    </div>
+
+    <div class="badge">
+      <span class="bg-success"></span>
+      <div>
+        <h5>Food</h5>
+        <h4>$399</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<canvas id="chart"></canvas> -->
+
+
+
+<!--
+ <div class="updates">
+    <span class="material-icons">update</span>
+    <h4>Updates Available</h4>
+    <p>Security Updates</p>
+    <p>General Updates</p>
+    <a href="#">Update Now</a>
+  </div> 
+-->

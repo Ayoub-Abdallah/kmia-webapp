@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMA | Admin</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/c352df61bb.js" crossorigin="anonymous"></script>
+    <link href="assets/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <img src="assets/images/Massinissa.png" class="logo" />
+            <div class="search-bar">
+                <span class="material-icons">search</span>
+                <input type="search" placeholder="Search" />
+            </div>
+
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-icons active">light_mode</span>
+                    <span class="material-icons">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="profile-photo">
+                        <img src="assets/images/profile pic.jpg" />
+                    </div>
+                    <h5>Ayoub</h5>
+                    <span class="material-icons">expand_more</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-icons">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+    <main>
+        <aside>
+            <button id="close-btn">
+                <span class="material-icons">close</span>
+            </button>
+            <div class="sidebar">
+                <a href="admin">
+                    <span class="material-icons">dashboard</span>
+                    <h4>Dashboard</h4>
+                </a>
+                <a href="students">
+                    <span class="material-icons">school</span>
+                    <h4>Étudiants</h4>
+                </a>
+                <a href="teachers">
+                    <span class="material-icons">person</span>
+                    <h4>Enseignants</h4>
+                </a>
+                <a href="groups">
+                    <span class="material-icons">group</span>
+                    <h4>Groupes</h4>
+                </a>
+                <a href="classrooms">
+                    <span class="material-icons">class</span>
+                    <h4>Salles de classe</h4>
+                </a>
+                <a href="finance">
+                    <span class="material-icons">attach_money</span>
+                    <h4>Finance</h4>
+                </a>
+
+                <!-- <a href="attendance">
+                    <span class="material-icons">check_circle</span>
+                    <h4>Présence</h4>
+                </a> -->
+                <a href="settings" class="active">
+                    <span class="material-icons">settings</span>
+                    <h4>Paramètres</h4>
+                </a>
+            </div>
+            <!-- End of sidebar -->
+
+            <!-- <div class="updates">
+                      <span class="material-icons">update</span>
+                      <h4>Updates Available</h4>
+                      <p>Security Updates</p>
+                      <p>General Updates</p>
+                      <a href="#">Update Now</a>
+                  </div> -->
+        </aside>
+        <!-- End of aside -->
+
+        <section class="middle" style="width:80vw">
+            <div class="header">
+                <h1>Paramètres</h1>
+            </div>
+        <div class="settings-btns-container">
+            <a class="settings-btns" href="/admins"> 
+                <span class="material-symbols-outlined">admin_panel_settings</span>&nbsp;&nbsp;Admins</a>
+            <a class="settings-btns" href="/login/logout">
+                <span class="material-symbols-outlined">door_open</span> &nbsp;&nbsp;Log out
+            </a>
+        </div>
+        </section>
+        <!-- End of Middle -->
+        <!-- End of right -->
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="assets/main.js"></script>
+    <!-- End of Main -->
+</body>
+
+</html>

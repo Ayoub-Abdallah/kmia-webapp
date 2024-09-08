@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMA | Admin</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/c352df61bb.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="assets/style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <img src="assets/images/Massinissa.png" class="logo" />
+            <div class="search-bar">
+                <span class="material-icons">search</span>
+                <input type="search" placeholder="Search" />
+            </div>
+
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-icons active">light_mode</span>
+                    <span class="material-icons">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="profile-photo">
+                        <img src="assets/images/profile pic.jpg" />
+                    </div>
+                    <h5>Ayoub</h5>
+                    <span class="material-icons">expand_more</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-icons">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+    <main>
+        <aside>
+            <button id="close-btn">
+                <span class="material-icons">close</span>
+            </button>
+            <div class="sidebar">
+                <a href="admin">
+                    <span class="material-icons">dashboard</span>
+                    <h4>Dashboard</h4>
+                </a>
+                <a href="students">
+                    <span class="material-icons">school</span>
+                    <h4>Étudiants</h4>
+                </a>
+                <a href="teachers">
+                    <span class="material-icons">person</span>
+                    <h4>Enseignants</h4>
+                </a>
+                <a href="groups">
+                    <span class="material-icons">group</span>
+                    <h4>Groupes</h4>
+                </a>
+                <a href="classrooms">
+                    <span class="material-icons">class</span>
+                    <h4>Salles de classe</h4>
+                </a>
+                <a href="finance" class="active">
+                    <span class="material-icons">attach_money</span>
+                    <h4>Finance</h4>
+                </a>
+
+                <!-- <a href="attendance">
+                    <span class="material-icons">check_circle</span>
+                    <h4>Présence</h4>
+                </a> -->
+                <a href="settings">
+                    <span class="material-icons">settings</span>
+                    <h4>Paramètres</h4>
+                </a>
+            </div>
+            <!-- End of sidebar -->
+
+            <!-- <div class="updates">
+                      <span class="material-icons">update</span>
+                      <h4>Updates Available</h4>
+                      <p>Security Updates</p>
+                      <p>General Updates</p>
+                      <a href="#">Update Now</a>
+                  </div> -->
+        </aside>
+        <!-- End of aside -->
+
+        <section class="middle" >
+            <div class="header">
+                <h1>Finance</h1>
+            </div>
+            <div class="finance-search">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFF">
+                    <path
+                        d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
+                </svg>
+                <label for="">Depuis<input type="date"></label>
+                <i class="seperator"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFF">
+                    <path
+                        d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Zm280 240q-17 0-28.5-11.5T440-440q0-17 11.5-28.5T480-480q17 0 28.5 11.5T520-440q0 17-11.5 28.5T480-400Zm-160 0q-17 0-28.5-11.5T280-440q0-17 11.5-28.5T320-480q17 0 28.5 11.5T360-440q0 17-11.5 28.5T320-400Zm320 0q-17 0-28.5-11.5T600-440q0-17 11.5-28.5T640-480q17 0 28.5 11.5T680-440q0 17-11.5 28.5T640-400ZM480-240q-17 0-28.5-11.5T440-280q0-17 11.5-28.5T480-320q17 0 28.5 11.5T520-280q0 17-11.5 28.5T480-240Zm-160 0q-17 0-28.5-11.5T280-280q0-17 11.5-28.5T320-320q17 0 28.5 11.5T360-280q0 17-11.5 28.5T320-240Zm320 0q-17 0-28.5-11.5T600-280q0-17 11.5-28.5T640-320q17 0 28.5 11.5T680-280q0 17-11.5 28.5T640-240Z" />
+                </svg>
+                <label for="">De<input type="date"></label>
+                <button><span class="material-icons">search</span> Rechercher </button>
+            </div>
+
+            <div class="finance-content">
+                <div class="card" >
+                    <h1>Income</h1>
+                    <button onclick="viewIncomes()">Revenu</button>
+
+                    <div>
+                        <span>Aujourd'hui:</span>
+                        <span class="value">48 000,00 DZD</span>
+                    </div>
+                    <div>
+                        <span>La semaine dernière:</span>
+                        <span class="value">123 500,00 DZD</span>
+                    </div>
+                    <div>
+                        <span>Le mois dernier:</span>
+                        <span class="value">699 500,00 DZD</span>
+                    </div>
+                    <div id="income-chart">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="card" >
+                    <h1>Outcome</h1>
+                    <button onclick="viewExpenses()">Dépense</button>
+
+                    <div>
+                        <span>Aujourd'hui:</span>
+                        <span class="value">48 000,00 DZD</span>
+                    </div>
+                    <div>
+                        <span>La semaine dernière:</span>
+                        <span class="value">123 500,00 DZD</span>
+                    </div>
+                    <div>
+                        <span>Le mois dernier:</span>
+                        <span class="value">699 500,00 DZD</span>
+                    </div>
+                    <div id="income-chart">
+                        <canvas id="outChart"></canvas>
+                    </div>
+
+                </div>
+                <div class="card">
+                    <h1>Profit</h1>
+                    <div>
+                        <span>Aujourd'hui:</span>
+                        <span class="value">48 000,00 DZD</span>
+                    </div>
+                    <div>
+                        <span>La semaine dernière:</span>
+                        <span class="value">123 500,00 DZD</span>
+                    </div>
+                    <div>
+                        <span>Le mois dernier:</span>
+                        <span class="value">699 500,00 DZD</span>
+                    </div>
+                    <div id="income-chart">
+                        <canvas id="profitChart"></canvas>
+                    </div>
+              
+                </div>
+            </div>
+            <!-- <h1>Analyses</h1> -->
+            <div class="analyseContainer">
+                <div id="analyse-chart">
+                    <canvas id="analyseChart"></canvas>
+                </div>
+                <div id="pieChart">
+                    <canvas id="myPieChart" width="400" height="400"></canvas>
+                </div>
+            </div>
+
+        </section>
+        <!-- End of Middle -->
+        <!-- income details start -->
+
+        <div class="back-cover income-details-cover">
+            <div class="income-details-container">
+                <div >
+                    <h1>Incomes</h1>
+                    <button onclick="closeTab()" type="button">Ok</button>
+                    <!-- <button type="button" onclick="handleDelete()">Enregistrer</button> -->
+                </div>
+                <table>
+                    <tr>
+                        <th>Libellé</th>
+                        <th>Date</th>
+                        <th>Somme</th>
+                        <th>Notes</th>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        <div class="back-cover expense-details-cover">
+            <div class="expense-details-container">
+                <div >
+                    <h1>Expenses</h1>
+                    <button onclick="closeTab()" type="button">Ok</button>
+                    <!-- <button type="button" onclick="handleDelete()">Enregistrer</button> -->
+                </div>
+                <table>
+                    <tr>
+                        <th>Libellé</th>
+                        <th>Date</th>
+                        <th>Somme</th>
+                        <th>Notes</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- income details end -->
+
+        <!-- End of right -->
+    </main>
+
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"
+        integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
+
+    <script src="assets/main.js"></script>
+    <script src="assets/financePageController.js"></script>
+    <script src="assets/pieChart.js">
+    </script>
+    <!-- End of Main -->
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
