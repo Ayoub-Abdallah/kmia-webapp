@@ -19,11 +19,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to MongoDB
 
-const DB_LINK = "mongodb+srv://admin:B7aK8Xynkmob1nbu@cluster0.vcvjrbg.mongodb.net/MY1DB?retryWrites=true&w=majority&appName=Cluster0"
+const DB_LINK = "mongodb+srv://kmia:DLWBYd8rxoQcK53d@cluster0.f11sh.mongodb.net/KMIADB?retryWrites=true&w=majority&appName=Cluster0"
 
 const LOCAL_LINK = 'mongodb://127.0.0.1:27017/MassinissaAcademy'
 
-mongoose.connect(LOCAL_LINK).
+mongoose.connect(DB_LINK).
     then(() => {
         console.log("connected to database Massinissa Academy");
 })
