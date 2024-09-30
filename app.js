@@ -56,6 +56,7 @@ const groupsRoutes = require('./routes/groups');
 const classroomsRoutes = require('./routes/classes');
 
 const financeRoutes = require('./routes/finance');
+const sessionRoutes = require('./routes/session');
 const attendanceRoutes = require('./routes/attendance');
 const settingsRoutes = require('./routes/settings');
 const loginRoutes = require('./routes/login');
@@ -70,6 +71,7 @@ app.use('/teachers',ensureAuthenticated, ensureRole(['superadmin', "admin"]), te
 app.use('/groups',ensureAuthenticated, ensureRole(['superadmin', "admin"]), groupsRoutes);
 app.use('/classrooms', ensureAuthenticated, ensureRole(["superadmin", "admin"]), classroomsRoutes);
 app.use('/finance',ensureAuthenticated, ensureRole(['superadmin']), financeRoutes);
+app.use('/sessions',ensureAuthenticated, ensureRole(['superadmin']), sessionRoutes);
 app.use('/attendance', ensureAuthenticated, ensureRole(['superadmin', "admin"]), attendanceRoutes);
 app.use('/settings',ensureAuthenticated, ensureRole(['superadmin', "admin"]), settingsRoutes);
 app.use('/login', loginRoutes);

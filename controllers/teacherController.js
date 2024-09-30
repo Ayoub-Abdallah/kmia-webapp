@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const PizZip = require('pizzip');
 const Docxtemplater = require('docxtemplater');
+const Expense = require('../models/expense');
 
 
 // Example controller functions
@@ -111,6 +112,20 @@ exports.addPaymentTeacher = async (req, res) => {
     // Add payment details to teacher record
     teacher.salary.push({ date: paymentEntry.date, amount: paymentEntry.amount, groupId: paymentEntry.groupId, paymentType: paymentEntry.payType });
     await teacher.save();
+
+    try {
+      let incomeData = {
+        name: "Payment d'enseignant : " + teacher.firstname + " " + teacher.lastname,
+        date: paymentEntry.date,
+        value: paymentEntry.amount,
+        notes: paymentEntry.groupId
+      }
+      const income = new Expense(incomeData);
+      await income.save();
+      console.log('Income created successfully:', income);
+    } catch (error) {
+      console.error('Error creating income:', error);
+    }
 
     // Generate MS Word document for payment proof
     const templateContent = fs.readFileSync(TEMPLATE_PATH, 'binary');

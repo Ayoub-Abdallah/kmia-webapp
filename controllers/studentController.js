@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const PizZip = require('pizzip');
 const Docxtemplater = require('docxtemplater');
+const Income = require('../models/income');
 
 // Example controller functions
 exports.renderAllStudents = async (req, res) => {
@@ -59,18 +60,18 @@ exports.editStudent = async (req, res) => {
     console.error('Error creating student:', error);
   }
 };
-exports.inscription = async (req, res) => {
-  try {
-    let _id = req.params.id
-    const insStudent = await Student.findById(_id)
-    insStudent.inscription = true
-    insStudent.save()
-    res.status(200).json({status: true, message: "Inscription enregistré avec succès"})
-    // console.log('Student created successfully:', tudent);
-  } catch (error) {
-    console.error('Error creating student:', error);
-  }
-};
+// exports.inscription = async (req, res) => {
+//   try {
+//     let _id = req.params.id
+//     const insStudent = await Student.findById(_id)
+//     insStudent.inscription = true
+//     insStudent.save()
+//     res.status(200).json({status: true, message: "Inscription enregistré avec succès"})
+//     // console.log('Student created successfully:', tudent);
+//   } catch (error) {
+//     console.error('Error creating student:', error);
+//   }
+// };
 exports.uninscription = async (req, res) => {
   try {
     let _id = req.params.id
@@ -169,6 +170,7 @@ exports.addPresence = async (req, res) => {
 
 
 var sn = 0
+var isn = 0
 
 const TEMPLATE_PATH = path.resolve(__dirname, '../templates/template.docx');
 exports.addPayment = async (req, res) => {
@@ -204,8 +206,20 @@ exports.addPayment = async (req, res) => {
         payed: [{ date, value }]
       });
     }
-
     await student.save();
+    try {
+      let incomeData = {
+        name: "Payment d'étudiant : " + student.firstname + " " + student.lastname,
+        date: paymentEntry.date,
+        value: paymentEntry.value,
+        notes: paymentEntry.groupId
+      }
+      const income = new Income(incomeData);
+      await income.save();
+      console.log('Income created successfully:', income);
+    } catch (error) {
+      console.error('Error creating income:', error);
+    }
 
     // Generate MS Word document for proof of all payments (dynamic)
     // const templatePath = TEMPLATE_PATH;
@@ -267,7 +281,82 @@ exports.addPayment = async (req, res) => {
 
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////
+// const TEMPLATE_PATH = path.resolve(__dirname, '../templates/proof_of_subscription_template.docx');
 
+exports.inscription = async (req, res) => {
+  try {
+    let _id = req.params.id;
+    const insStudent = await Student.findById(_id);
+    if (!insStudent) {
+      return res.status(404).json({ status: false, message: 'Student not found' });
+    }
+
+    // Update the student's inscription status
+    insStudent.inscription = true;
+    await insStudent.save();
+    const now = new Date();
+    const formattedDateTime = now.toISOString().slice(0, 19).replace('T', ' ');
+    try {
+      let incomeData = {
+        name: "Inscription d'étudiant : " + insStudent.firstname + " " + insStudent.lastname,
+        date: now.toISOString(),
+        value: 1000,
+        notes: "/"
+      }
+      const income = new Income(incomeData);
+      await income.save();
+      console.log('Income created successfully:', income);
+    } catch (error) {
+      console.error('Error creating income:', error);
+    }
+
+    // Check if the request wants to download the document
+    if (req.query.download === 'true') {
+      // Load and prepare the template
+      const templateContent = fs.readFileSync(TEMPLATE_PATH, 'binary');
+      const zip = new PizZip(templateContent);
+      const doc = new Docxtemplater(zip);
+
+      // Set the data for the proof of subscription
+     
+      isn = isn + 1;
+      doc.setData({
+        serialnumber: isn,
+        firstname: insStudent.firstname,
+        lastname: insStudent.lastname,
+        datetime: formattedDateTime,
+        installmentname: "دفعة طالب",
+        installmenttype: "حقوق التسجيل",
+        groupname: "/",
+        installmentvalue: "1000 DZD"
+      });
+
+      try {
+        doc.render();
+      } catch (error) {
+        console.error('Error rendering document:', error);
+        return res.status(500).json({ status: false, message: 'Error generating subscription proof document.' });
+      }
+
+      const buffer = doc.getZip().generate({ type: 'nodebuffer' });
+
+      // Send the generated file as a downloadable response
+      res.set({
+        'Content-Type': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'Content-Disposition': `attachment; filename="proof_of_subscription_${_id}.docx"`
+      });
+
+      return res.send(buffer);
+    } else {
+      // Respond with a success message
+      return res.status(200).json({ status: true, message: 'Inscription recorded successfully' });
+    }
+  } catch (error) {
+    console.error('Error processing inscription:', error);
+    return res.status(500).json({ status: false, message: 'Error processing inscription.' });
+  }
+};
 
 
 

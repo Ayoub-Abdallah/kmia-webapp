@@ -393,8 +393,8 @@ searchBtn.addEventListener( "click" , event =>{
   const url = `/search/teachers?${queryParams.toString()}`;
 
   // fetch(url)
-  fetch(url).then(async response => response.json()).then(async students => {
-    console.log(students)
+  fetch(url).then(async response => response.json()).then(async teachers => {
+    console.log(teachers)
     console.log(studentsTable)
     studentsTable.innerHTML = `
                       <tr>
@@ -407,40 +407,40 @@ searchBtn.addEventListener( "click" , event =>{
                         <th>Paiement</th>
                     </tr>
     `
-    students.forEach(student => {
-      // let groups = ''
-      // student.groups.map(element => {
-      //   groups += element.name + " , "
-      // });
+    teachers.forEach(teacher => {
+      let groups = ''
+      teacher.groups.map(element => {
+        groups += element.name + " , "
+      });
       studentsTable.innerHTML += `
           <tr>
                             <td>
-                                <button class="checkBox" onclick="check(event, '${ student._id }') ">
+                                <button class="checkBox" onclick="check(event, '${ teacher.teacher._id }') ">
                                     &#10003;
                                     <!-- &check; -->
                                 </button>
                             </td>
 
                             <td>
-                                ${ student.firstname }
+                                ${ teacher.teacher.firstname }
                             </td>
                             <td>
-                                ${ student.lastname }
+                                ${ teacher.teacher.lastname }
                             </td>
                             <td>
-                                ${ student.sex  }
+                                ${ teacher.teacher.sex  }
                             </td>
                            
                             <td>
-                                ${ student.phone  }
+                                ${ teacher.teacher.phone  }
                             </td>
                             <td>
-                             ${ student.groups }
+                             ${ groups }
                             
                                
                             </td>
                            
-                            <td onclick="teacherPayment('${ student._id }')" class="paimentTD">
+                            <td onclick="teacherPayment('${ teacher.teacher._id }')" class="paimentTD">
                                pay
                             </td>
                       

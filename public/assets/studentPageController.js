@@ -573,7 +573,7 @@ searchBtn.addEventListener( "click" , event =>{
                         <!-- <th>Note</th> -->
                         <th>Frais (DZD)</th>
                         <th>Présence</th>
-
+                        <th></th>
                     </tr>
     `
     students.forEach(student => {
@@ -618,6 +618,17 @@ searchBtn.addEventListener( "click" , event =>{
                                 <button onclick="setPresence('${ student.student._id }')">
                                     <span class=" material-icons">calendar_month</span>
                                 </button>
+                            </td>
+                            <td>
+                               ${ (student.student.inscription)? `
+                                    <span class="material-icons dot green" 
+                                    onclick="unsetInscription(${ student.student._id })"
+                                    >circle</span>`
+                                  :`
+                                    <span class="material-icons dot red"
+                                    onclick="setInscription(${ student.student._id})"
+                                    >circle</span>`
+                            }
                             </td>
                         </tr>
       `
@@ -675,27 +686,58 @@ document.getElementById('addTagButton').addEventListener('click', function() {
     // selectedTags.push({ id: selectedTagId, name: selectedTag });
     selectedTags.push(selectedTagId);
 });
-
-function setInscription(id){
+function setInscription(id) {
   try {
-    fetch('/students/inscription/' + id , {
+    fetch('/students/inscription/' + id + '?download=true', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
-      },
-      // body: JSON.stringify(studentPayment)
-    }).then(res => res.json()).then(data =>{
-      console.log(data)
-      if(data.status){
-        document.querySelector(".success-message-cover h2").innerHTML = data.message
-        document.querySelector(".success-message-cover").classList.add("active")
       }
     })
-  }catch(err){
-    console.error(err)
-  }
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
 
+      const contentType = res.headers.get('Content-Type');
+
+      if (contentType.includes('application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+        // Handle file download
+        return res.blob().then(blob => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `proof_of_subscription_${id}.docx`;
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          window.URL.revokeObjectURL(url);
+
+          // Display success message after the download
+          document.querySelector(".success-message-cover h2").innerHTML = "Subscription successful! Proof document downloaded.";
+          document.querySelector(".success-message-cover").classList.add("active");
+        });
+      } else if (contentType.includes('application/json')) {
+        // Handle JSON response
+        return res.json().then(data => {
+          console.log(data);
+          if (data.status) {
+            document.querySelector(".success-message-cover h2").innerHTML = data.message;
+            document.querySelector(".success-message-cover").classList.add("active");
+          }
+        });
+      } else {
+        throw new Error('Unexpected content type');
+      }
+    })
+    .catch(err => {
+      console.error('Error:', err);
+    });
+  } catch (err) {
+    console.error('Error:', err);
+  }
 }
+
 function unsetInscription(id){
   try {
     fetch('/students/uninscription/' + id , {

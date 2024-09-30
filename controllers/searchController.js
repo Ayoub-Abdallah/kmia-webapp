@@ -9,25 +9,31 @@ exports.searchStudent = async (req, res) => {
     const { query, category } = req.query;
     let studentsArray = [];
 
+    const regexQuery = new RegExp(query, 'i'); // Create a case-insensitive regex for partial matching
+
     switch (category) {
       case "name":
         studentsArray = await Student.find({
           $or: [
-            { firstname: query },
-            { lastname: query }
+            { firstname: regexQuery },
+            { lastname: regexQuery }
           ]
         });
         break;
         
       case "group":
         try {
-          const group = await Group.findOne({ name: query });
-          
+          const group = await Group.find({ name: regexQuery });
+          console.log("founded group: " + regexQuery)
+          console.log(group)
+
           if (!group) {
             return res.status(404).send('Group not found');
           }
-          
-          studentsArray = await Student.find({ group: group._id.toString() });
+          const groupIds = group.map(group => group._id);
+
+          // Find students whose group array contains any of the group IDs
+          studentsArray = await Student.find({ group: { $in: groupIds } });
         } catch (err) {
           console.error(err);
           return res.status(500).send('Server error');
@@ -36,7 +42,7 @@ exports.searchStudent = async (req, res) => {
         
       case "phone":
         try {
-          studentsArray = await Student.find({ phone: query });
+          studentsArray = await Student.find({ phone: regexQuery });
         } catch (error) {
           console.error(error);
           return res.status(500).send('Server error');
@@ -48,54 +54,57 @@ exports.searchStudent = async (req, res) => {
         return res.status(400).send('Invalid search category');
     }
 
+    // Fetch group details for each student
     let students = await Promise.all(studentsArray.map(async (student) => {
       let groups = await Group.find({ _id: student.group });
       return { student, groups };
     }));
 
-    console.log("searched students: ")
-    console.log(students)
-    // res.render("students", { students });
+    console.log("searched students: ");
+    console.log(students);
+    // Return the results as JSON
     res.json(students);
-
 
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
-
 ///////////////////////////////////////////////////////////////////////
-
 
 
 exports.searchTeacher = async (req, res) => {
   try {
     const { query, category } = req.query;
-    let studentsArray = [];
+    let teachersArray = [];
+
+    // Create a case-insensitive regex for partial matching
+    const regexQuery = new RegExp(query, 'i');
 
     switch (category) {
       case "name":
-        studentsArray = await Teacher.find({
+        teachersArray = await Teacher.find({
           $or: [
-            { firstname: query },
-            { lastname: query }
+            { firstname: regexQuery },
+            { lastname: regexQuery }
           ]
         });
-        console.log("studentsArray")
-        console.log(studentsArray)
         break;
         
       case "group":
         try {
-          const group = await Group.findOne({ name: query });
-          
-          if (!group) {
-            return res.status(404).send('Group not found');
+          // Find groups that match the query
+          const groups = await Group.find({ name: regexQuery });
+
+          if (groups.length === 0) {
+            return res.status(404).send('No groups found');
           }
-          
-          studentsArray = await Teacher.find({ group: group._id.toString() });
+
+          // Extract group IDs from the found groups
+          const groupIds = groups.map(group => group._id);
+
+          // Find teachers whose group array contains any of the group IDs
+          teachersArray = await Teacher.find({ group: { $in: groupIds } });
         } catch (err) {
           console.error(err);
           return res.status(500).send('Server error');
@@ -104,7 +113,7 @@ exports.searchTeacher = async (req, res) => {
         
       case "phone":
         try {
-          studentsArray = await Teacher.find({ phone: query });
+          teachersArray = await Teacher.find({ phone: regexQuery });
         } catch (error) {
           console.error(error);
           return res.status(500).send('Server error');
@@ -112,26 +121,23 @@ exports.searchTeacher = async (req, res) => {
         break;
         
       default:
-        console.log("The default in switch case of student search");
+        console.log("The default in switch case of teacher search");
         return res.status(400).send('Invalid search category');
     }
+    let teachers = await Promise.all(teachersArray.map(async (teacher) => {
+      let groups = await Group.find({ _id: teacher.group });
+      return { teacher, groups };
+    }));
 
-    // let students = await Promise.all(studentsArray.map(async (student) => {
-    //   let groups = await Group.find({ _id: student.group });
-    //   return { student, groups };
-    // }));
-
-    console.log("searched students: ")
-    console.log(studentsArray)
-    const students = studentsArray
-    // res.render("students", { students });
-    res.json( students );
-
+    console.log("searched teachers: ");
+    console.log(teachers);
+    res.json(teachers);
 
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 
 
