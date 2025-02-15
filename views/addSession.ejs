@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMA | Admin</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=stacked_bar_chart" />
+    <script src="https://kit.fontawesome.com/c352df61bb.js" crossorigin="anonymous"></script>
+    <link href="/assets/style.css" rel="stylesheet" />
+    
+    <style>
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select,
+        input[type="number"],
+        input[type="date"],
+        input[type="time"] {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .days-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .day {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+        .selected {
+            background-color: #218db8;
+            color: white;
+        }
+
+        .inactive {
+            background-color: lightgrey;
+            color: #fff;
+            cursor: not-allowed;
+        }
+        .calc-sessions-btn{
+            background-color: #218db8;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: white;
+        }
+        .save-schedual{
+            background-color: #21b858;
+            padding: 10px 20px;
+            border-radius: 6px;
+            color: white;
+            margin: 10px 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <img src="/assets/images/Massinissa.png" class="logo" />
+            <div class="search-bar">
+                <span class="material-icons">search</span>
+                <input type="search" placeholder="Search" />
+            </div>
+
+            <div class="profile-area">
+                <div class="theme-btn">
+                    <span class="material-icons active">light_mode</span>
+                    <span class="material-icons">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="profile-photo">
+                        <img src="/assets/images/profile pic.jpg" />
+                    </div>
+                    <h5>Ayoub</h5>
+                    <span class="material-icons">expand_more</span>
+                </div>
+                <button id="menu-btn">
+                    <span class="material-icons">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+    <main>
+        <aside>
+            <button id="close-btn">
+                <span class="material-icons">close</span>
+            </button>
+            <div class="sidebar">
+                <a href="/admin">
+                    <span class="material-icons">dashboard</span>
+                    <h4>Dashboard</h4>
+                </a>
+                <a href="/students">
+                    <span class="material-icons">school</span>
+                    <h4>Étudiants</h4>
+                </a>
+                <a href="/teachers">
+                    <span class="material-icons">person</span>
+                    <h4>Enseignants</h4>
+                </a>
+                <a href="/groups">
+                    <span class="material-icons">group</span>
+                    <h4>Groupes</h4>
+                </a>
+                <a href="/sessions" class="active">
+                    <span class="material-symbols-outlined">
+                        stacked_bar_chart
+                    </span>
+                    <h4>Sessions</h4>
+                </a>
+                <a href="/classrooms">
+                    <span class="material-icons">class</span>
+                    <h4>Salles de classe</h4>
+                </a>
+                <a href="/finance">
+                    <span class="material-icons">attach_money</span>
+                    <h4>Finance</h4>
+                </a>
+
+                <!-- <a href="attendance">
+                    <span class="material-icons">check_circle</span>
+                    <h4>Présence</h4>
+                </a> -->
+                <a href="/settings">
+                    <span class="material-icons">settings</span>
+                    <h4>Paramètres</h4>
+                </a>
+            </div>
+            <!-- End of sidebar -->
+
+            <!-- <div class="updates">
+                      <span class="material-icons">update</span>
+                      <h4>Updates Available</h4>
+                      <p>Security Updates</p>
+                      <p>General Updates</p>
+                      <a href="#">Update Now</a>
+                  </div> -->
+        </aside>
+        <!-- End of aside -->
+
+        <section class="middle">
+            <div class=" header">
+                <h1>Ajouter Scéances</h1>
+            </div>
+
+            <form id="courseForm">
+                <label for="group">Group:</label>
+                <select id="group" name="group" class="groups-select" required></select>
+
+                <label for="duration">Duration (months):</label>
+                <input type="number" name="months" id="duration" min="1" placeholder="Enter number of months" required>
+
+                <label for="sessions">Number of Sessions per Week:</label>
+                <input type="number" name="sessionsPerWeek" id="sessions" min="1" max="7" required>
+
+                <label for="startDate">Start Date:</label>
+                <input type="date" name="startDate" id="startDate" required>
+
+
+                <label>Days of the Week:</label>
+                <div class="days-container" id="days">
+                    <div class="day" data-day="Saturday">Sam</div>
+                    <div class="day" data-day="Sunday">Dim</div>
+                    <div class="day" data-day="Monday">Lun</div>
+                    <div class="day" data-day="Tuesday">Mar</div>
+                    <div class="day" data-day="Wednesday">Mer</div>
+                    <div class="day" data-day="Thursday">Jeu</div>
+                    <div class="day" data-day="Friday">Ven</div>
+                </div>
+
+
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="sessionDuration">Session Duration (In minutes):</label>
+                <input type="number" min="30" id="sessionDuration" name="sessionDuration" required />
+
+                <button type="button" class="calc-sessions-btn">Calculer</button>
+            </form>
+
+            </div>
+            <div id="scheduleTableContainer"></div>
+            </form>
+
+
+        </section>
+
+
+        <!-- End of Main -->
+         <script src="/assets/addSessionController.js"></script>
+</body>
+
+</html>

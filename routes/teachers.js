@@ -9,6 +9,7 @@ const authMiddleware = require('../authMiddleware');
 // router.use(authMiddleware.ensureAuthenticated);
 
 router.get('/', teacherController.renderAllTeachers);
+router.get('/get', teacherController.getAllTeachers);
 router.post('/add-teacher', teacherController.createTeacher);
 router.post('/export', teacherController.exportXls);
 router.get('/groups/:id', teacherController.getTeacherWithGroupsById);

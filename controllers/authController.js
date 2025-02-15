@@ -17,9 +17,9 @@ exports.handleLogin = async (req, res) => {
 
     if (user) {
       // Compare the hashed password
-      const match = await bcrypt.compare(password, user.password);
+      // const match = await bcrypt.compare(password, user.password);
 
-      if (match) {
+      if (password == user.password) {
         // Store user session
         req.session.user = { username: user.firstname, roles: user.roles, _id: user._id };
         console.log("Successfully logged in");

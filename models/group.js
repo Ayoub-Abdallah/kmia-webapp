@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const groupSchema = new Schema({
     name: { type: String, required: true },
     schoolyear: { type: String, default: '' },
-    teachers: { type: [Number], default: [] },
+    teachers: { type: [String], default: [] },
     notes: { type: String, default: '' }
   });
   

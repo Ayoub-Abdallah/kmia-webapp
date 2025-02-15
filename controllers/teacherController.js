@@ -7,6 +7,14 @@ const PizZip = require('pizzip');
 const Docxtemplater = require('docxtemplater');
 const Expense = require('../models/expense');
 
+exports.getAllTeachers = async (req, res) => {
+  try {
+    const teachers = await Teacher.find();
+    res.json(teachers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // Example controller functions
 exports.renderAllTeachers = async (req, res) => {

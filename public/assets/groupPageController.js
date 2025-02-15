@@ -16,6 +16,35 @@ function activateTab(num){
         tab.classList.remove("active")
     });
     tabList[num].classList.add("active")
+    if(num == 0){
+      try{
+        fetch('/teachers/get').then(response => response.json()).then(data => {
+          console.log(data)
+          document.querySelector(".add-group-teacher-select").innerHTML = `<option value="">Selectionner un Enseignant</option>`
+          data.forEach(teacher => {
+            document.querySelector(".add-group-teacher-select").innerHTML += ` 
+               <option value="${teacher._id}" data-id="${teacher._id}">${teacher.firstname + " " + teacher.lastname }</option>`
+          });
+        })
+      }catch(err){
+        console.error(err)
+      }
+    }
+    else if(num == 1){
+      try{
+        fetch('/teachers/get').then(response => response.json()).then(data => {
+          console.log(data)
+          // document.querySelector(".edit-student-group-select").innerHTML = `<option value="">Selectionner un Enseignant</option>`
+          document.querySelector(".edit-group-teacher-select").innerHTML = `<option value="">Selectionner un Enseignant</option>`
+          data.forEach(teacher => {
+            document.querySelector(".edit-group-teacher-select").innerHTML += ` 
+              <option value="${teacher._id}" data-id="${teacher._id}">${teacher.firstname + " " + teacher.lastname }</option>`
+          });
+        })
+      }catch(err){
+        console.error(err)
+      }
+}
 }
 
 function deactivateTabs(num){
@@ -82,19 +111,50 @@ function check(event, id) {
 }
 
 
-function editGroup(){
+async function editGroup(){
   if(selected.length != 1) return
   activateTab(1)
-  try{
-    fetch('/groups/'+ selected[0]).then(response => response.json()).then(data => {
-      console.log(data)
-      groupName.value = data[0].name
-      teachers.value = data[0].teachers[0]
-      schoolYear.value = data[0].schoolyear
-      notes.innerHTML = data[0].notes
-    })
-  }catch(err){
-    console.error(err)
+  try {
+    // Fetch group data
+    const groupResponse = await fetch(`/groups/${selected[0]}`);
+    if (!groupResponse.ok) throw new Error('Failed to fetch group');
+    
+    const groupData = await groupResponse.json();
+    if (!groupData.length) throw new Error('Group not found');
+  
+    const group = groupData[0];
+    
+    // Update group info
+    groupName.value = group.name;
+    schoolYear.value = group.schoolyear;
+    notes.innerHTML = group.notes;
+  
+    // Handle teachers
+    if (group.teachers?.length) {
+      const teacherId = group.teachers[0];
+      
+      // Fetch teacher data
+      const teacherResponse = await fetch(`/teachers/${teacherId}`);
+      if (!teacherResponse.ok) throw new Error('Failed to fetch teacher');
+      
+      const teacherData = await teacherResponse.json();
+      if (teacherData.length) {
+        const teacher = teacherData[0];
+        document.querySelector(".current-teacher").textContent = 
+          `${teacher.firstname} ${teacher.lastname}`;
+        teachers.value = teacherId;
+      } else {
+        console.warn('Teacher not found');
+        document.querySelector(".current-teacher").textContent = 'No teacher assigned';
+      }
+    } else {
+      document.querySelector(".current-teacher").textContent = 'No teacher assigned';
+    }
+  
+  } catch (err) {
+    console.error('Error:', err);
+    // Show error to user
+    alert('Failed to load group data. Please try again.');
   }
  
 }

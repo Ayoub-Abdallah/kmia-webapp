@@ -23,7 +23,7 @@ const DB_LINK = "mongodb+srv://kmia:DLWBYd8rxoQcK53d@cluster0.f11sh.mongodb.net/
 
 const LOCAL_LINK = 'mongodb://127.0.0.1:27017/MassinissaAcademy'
 
-mongoose.connect(DB_LINK).
+mongoose.connect(LOCAL_LINK).
     then(() => {
         console.log("connected to database Massinissa Academy");
 })
@@ -64,6 +64,13 @@ const searchRoutes = require('./routes/search');
 
 
 // app.use('/', indexRoutes);
+app.get('/', (req, res) => {res.render('index')})
+app.get('/contact', (req, res) => {res.render('contact')})
+app.get('/courses', (req, res) => {res.render('courses')})
+app.get('/about', (req, res) => {res.render('about')})
+app.get('/team', (req, res) => {res.render('team')})
+app.get('/testimonial', (req, res) => {res.render('testimonial')})
+
 app.use('/admin',ensureAuthenticated, ensureRole(['superadmin', "admin"]), indexRoutes);
 app.use('/admins',ensureAuthenticated, ensureRole(['superadmin']), adminRoutes);
 app.use('/students',ensureAuthenticated, ensureRole(['superadmin', "admin"]), studentRoutes);
@@ -77,6 +84,7 @@ app.use('/settings',ensureAuthenticated, ensureRole(['superadmin', "admin"]), se
 app.use('/login', loginRoutes);
 app.use('/login/logout', loginRoutes);
 app.use('/search', searchRoutes);
+app.use('/*', (req, res) => {res.render('404')})
 
 /////////////////////////////////////////////////////////
 

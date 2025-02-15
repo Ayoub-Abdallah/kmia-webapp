@@ -33,8 +33,8 @@ exports.createadmin = async (req, res) => {
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(adminData.password, 10); // 10 is the salt rounds
-    adminData.password = hashedPassword;
+    // const hashedPassword = await bcrypt.hash(adminData.password, 10); // 10 is the salt rounds
+    // adminData.password = hashedPassword;
 
     const admin = new Admin(adminData);
     await admin.save();
